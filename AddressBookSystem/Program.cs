@@ -92,7 +92,7 @@ namespace AddressBookSystem
                     "1 : Add Contact Details to " + addressBook.Name + " Address Book\n" +
                     "2 : Edit a Contact Detail\n" +
                     "3 : Delete a Contact Detail\n" +
-                    "4: Display the contents of the AddresBook"+
+                    "4: Display the contents of the AddresBook\n"+
                     "0 : Exit");
 
                     try
@@ -109,6 +109,10 @@ namespace AddressBookSystem
                     {
                         case 1:
                             addressBook.AddNewContactToAddressBook();                      //Function to add Contact in AddressBook
+                            break;
+
+                        case 2:
+                            addressBook.EditDetailsInAddressBook();                        //Function to Edit Details in AddressBook
                             break;
 
                         case 4:

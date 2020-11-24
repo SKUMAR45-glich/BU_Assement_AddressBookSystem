@@ -48,11 +48,19 @@ namespace AddressBookSystem
 
         }
 
+
+        public void EditDetailsInAddressBook()
+        {
+
+            _AddressBookforImplement[Name].EditContactDetails();
+        }
+
+
         //Display contact details in current address book
         public void DisplayContactsInCurrentAddressBook()
         {
             _AddressBookforImplement[Name].DisplayAllContacts();
-            logDetails.LogInfo("Data Dispaced");
+            logDetails.LogInfo("Data Displayed");
         }
 
     }

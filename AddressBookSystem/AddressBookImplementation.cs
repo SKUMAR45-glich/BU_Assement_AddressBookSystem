@@ -8,6 +8,7 @@ namespace AddressBookSystem
     public class AddressBookImplementation
     {
         Dictionary<string, ContactDetails> _addressBook;
+        LogDetails logDetails = new LogDetails();
 
 
         //Regex Checking for Values
@@ -56,7 +57,7 @@ namespace AddressBookSystem
             {
                 throw new ValidationException(ValidationException.InvalidationType.INVALID_PHONE_NUMBER, "Phone Number should start with 91 and have exactly 10 digits");
             }
-            
+
 
             Console.Write("Email : ");
             contact.Email = Console.ReadLine();
@@ -68,18 +69,87 @@ namespace AddressBookSystem
             }
             Console.WriteLine();
 
-            _addressBook.Add(contact.FirstName, contact);
+            _addressBook.Add(contact.FirstName, contact);                 //Addition in Dictionary with FirstName as Key
 
 
             return;
         }
 
 
+
+        public void EditContactDetails()
+        {
+            string name;
+            Console.WriteLine("Enter First Name whose details need to be edited ");
+            name = Console.ReadLine();
+
+            if (_addressBook.ContainsKey(name))
+            {
+
+
+                bool notCompleted = true;
+                int choice;
+
+                Console.WriteLine("Enter\n" +
+                        "1 : Edit City\n" +
+                        "2 : Edit State\n" +
+                        "3 : Edit Zip\n" +
+                        "4 : Edit Phone Number\n" +
+                        "5 : Edit Email ID\n" +
+                        "0 : Edit Completed");
+
+                while (notCompleted)
+                {
+                    try
+                    {
+                        choice = Int32.Parse(Console.ReadLine());
+                    }
+                    catch (Exception e)
+                    {
+                        logDetails.LogDebug("Class : AddressBookMain , Method : EditContact, Field : choice");
+                        logDetails.LogError(e.Message + " It should be a integer");
+                        choice = 0;
+                    }
+                    switch (choice)
+                    {
+                        case 1:
+                            Console.Write("Edit Updated City :");
+                            _addressBook[name].City = Console.ReadLine();
+                            break;
+                        case 2:
+                            Console.Write("Edit Updated State :");
+                            _addressBook[name].State = Console.ReadLine();
+                            break;
+                        case 3:
+                            Console.Write("Edit Updated Zip :");
+                            _addressBook[name].Zip = Console.ReadLine();
+                            break;
+                        case 4:
+                            Console.Write("Edit Updated Phone Number :");
+                            _addressBook[name].PhoneNumber = Console.ReadLine();
+                            break;
+                        case 5:
+                            Console.Write("Edit Updated Email Id :");
+                            _addressBook[name].Email = Console.ReadLine();
+                            break;
+                        case 0:
+                            notCompleted = false;
+                            break;
+                        default:
+                            Console.WriteLine("Wrong Choice\nChoose Again");
+                            break;
+                    }
+                    if (choice != 0)
+                        Console.WriteLine("\nIf there is anything else to edit, enter respective number\n" + "else enter 0 to exit");
+                }
+
+            }
+        }
         //Display Contact Details
         public void DisplayAllContacts()
         {
             Console.WriteLine("All Contacts are :");
-            foreach(var item in _addressBook)
+            foreach (var item in _addressBook)
             {
                 Console.WriteLine(item.Value.Display());
             }
