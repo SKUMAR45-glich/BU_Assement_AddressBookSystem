@@ -28,6 +28,8 @@ namespace AddressBookSystem
                 "1 : To Add a new Address Book\n" +                                              
                 "2 : To use current address books ( " + addressBook.Name + " )\n" +
                 "3 : Switch Address Book\n" +
+                "4. Search by State in AddressBook\n"+
+                "5. Search by Mumbai in AddressBook\n"+
                 "0 : Exit");
 
                 int userChoice;
@@ -68,6 +70,13 @@ namespace AddressBookSystem
                         logDetails.LogDebug("AddressBook Switched");
                         break;
 
+                    case 4:
+                        addressBook.SearchinAddressBooksByState();
+                        break;
+
+                    case 5:
+                        addressBook.SearchinAddressBooksByCity();
+                        break;
 
                     case 0:
                         checkAddressBook = false;
@@ -138,7 +147,7 @@ namespace AddressBookSystem
                             break;
 
                         default:
-                            Console.WriteLine("Please Enter Correct Oprtion");
+                            Console.WriteLine("Please Enter Correct Option");
                             break;
                     }
                 }

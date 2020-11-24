@@ -88,5 +88,29 @@ namespace AddressBookSystem
             _AddressBookforImplement[Name].DisplayContactByCity(city);                      //Search by city by AddressBook Name as key
         }
 
+
+        //Display Contact Details By Accoring to State in full AddressBook
+        public void SearchinAddressBooksByState()
+        {
+            Console.WriteLine("Enter the State to be searched:");
+            string state = Console.ReadLine();
+
+            foreach (var addressBook in _AddressBookforImplement)
+            {
+                addressBook.Value.DisplayContactByState(state);                                  //Search by State
+            }
+        }
+
+        //Display Contact Details By Accoring to City in full AddressBook
+        public void SearchinAddressBooksByCity()
+        {
+            Console.WriteLine("Enter the City to be searched:");
+            string city = Console.ReadLine();
+
+            foreach (var addressBook in _AddressBookforImplement)
+            {
+                addressBook.Value.DisplayContactByCity(city);                                     //Search by State
+            }
+        }
     }
 }
