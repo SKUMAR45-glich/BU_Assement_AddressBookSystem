@@ -115,6 +115,10 @@ namespace AddressBookSystem
                             addressBook.EditDetailsInAddressBook();                        //Function to Edit Details in AddressBook
                             break;
 
+                        case 3:
+                            addressBook.DeletetheContactDetail();                           //Function to Delete the Contact Details in AddressBook
+                            break;
+
                         case 4:
                             addressBook.DisplayContactsInCurrentAddressBook();               //Display the Contact in the AddressBook
                             break;

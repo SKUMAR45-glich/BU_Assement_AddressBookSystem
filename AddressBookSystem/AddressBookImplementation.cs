@@ -76,6 +76,7 @@ namespace AddressBookSystem
         }
 
 
+        //Edit the Details
 
         public void EditContactDetails()
         {
@@ -145,6 +146,25 @@ namespace AddressBookSystem
 
             }
         }
+
+        //Delete the Contact Details
+        public void DeleteContactDetails()
+        {
+            string name;
+            Console.WriteLine("Enter First Name whose details need to be deleted ");
+            name = Console.ReadLine();
+
+            if (_addressBook.ContainsKey(name))
+            {
+                _addressBook.Remove(name);
+                Console.WriteLine("Details of " + name + " deleted successfully");
+            }
+            else
+                Console.WriteLine("Details of " + name + " is not present");
+            return;
+        }
+
+
         //Display Contact Details
         public void DisplayAllContacts()
         {

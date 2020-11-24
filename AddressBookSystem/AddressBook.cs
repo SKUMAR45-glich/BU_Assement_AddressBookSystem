@@ -48,11 +48,18 @@ namespace AddressBookSystem
 
         }
 
-
+        //Edit the Contact Details
         public void EditDetailsInAddressBook()
         {
 
             _AddressBookforImplement[Name].EditContactDetails();
+        }
+
+
+        //Delete a contact detail
+        public void DeletetheContactDetail()
+        {
+            _AddressBookforImplement[Name].DeleteContactDetails();
         }
 
 
