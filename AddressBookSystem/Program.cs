@@ -25,12 +25,14 @@ namespace AddressBookSystem
             while (checkAddressBook)
             {
                 Console.WriteLine("Enter\n" +
-                "1 : To Add a new Address Book\n" +                                              
+                "1 : To Add a new Address Book\n" +
                 "2 : To use current address books ( " + addressBook.Name + " )\n" +
                 "3 : Switch Address Book\n" +
-                "4. Search by State in AddressBook\n"+
-                "5. Search by Mumbai in AddressBook\n"+
-                "0 : Exit");
+                "4. Search by State in AddressBook\n" +
+                "5. Search by City in AddressBook\n" +
+                "6. Count by State in AddressBook\n"+
+                "7. Count by City in AddressBook\n"+
+                "0 : Exit"); ;
 
                 int userChoice;
 
@@ -71,11 +73,19 @@ namespace AddressBookSystem
                         break;
 
                     case 4:
-                        addressBook.SearchinAddressBooksByState();
+                        addressBook.SearchinAddressBooksByState();                                //Search for state in Across AddressBook
                         break;
 
                     case 5:
-                        addressBook.SearchinAddressBooksByCity();
+                        addressBook.SearchinAddressBooksByCity();                                  //Search for city in Across AddressBook
+                        break;
+
+                    case 6:
+                        addressBook.DisplayPersonCountByState();                                  //Display Count by state in Across AddressBook
+                        break;
+
+                    case 7:
+                        addressBook.DisplayPersonCountByCity();                                  //Display Count by city in Across AddressBook
                         break;
 
                     case 0:

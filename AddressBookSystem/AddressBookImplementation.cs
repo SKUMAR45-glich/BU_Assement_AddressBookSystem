@@ -8,6 +8,9 @@ namespace AddressBookSystem
     public class AddressBookImplementation
     {
         Dictionary<string, ContactDetails> _addressBook;
+        Dictionary<string, List<string>> _personByState = new Dictionary<string, List<string>>();
+        Dictionary<string, List<string>> _personByCity = new Dictionary<string, List<string>>();
+
         LogDetails logDetails = new LogDetails();
 
 
@@ -70,6 +73,9 @@ namespace AddressBookSystem
             Console.WriteLine();
 
             _addressBook.Add(contact.FirstName, contact);                 //Addition in Dictionary with FirstName as Key
+
+            AddToStateDict(contact.State, contact.FirstName);
+            AddToCityDict(contact.City, contact.FirstName);
 
 
             return;
@@ -198,6 +204,33 @@ namespace AddressBookSystem
         }
 
 
-       
+        private void AddToStateDict(string state, string name)
+        {
+            if (this._personByState.ContainsKey(state))
+                this._personByState[state].Add(name);
+            else
+                this._personByState.Add(state, new List<string>() { name });
+        }
+
+
+        private void AddToCityDict(string city, string name)
+        {
+            if (this._personByCity.ContainsKey(city))
+                this._personByCity[city].Add(name);
+            else
+                this._personByCity.Add(city, new List<string>() { name });
+        }
+
+
+        public Dictionary<string, List<string>> AllContactNamesByState()
+        {
+            return _personByState;
+        }
+
+
+        public Dictionary<string, List<string>> AllContactNamesByCity()
+        {
+            return _personByCity;
+        }
     }
 }

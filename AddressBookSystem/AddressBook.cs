@@ -112,5 +112,101 @@ namespace AddressBookSystem
                 addressBook.Value.DisplayContactByCity(city);                                     //Search by State
             }
         }
+
+
+        //Dictionary with key as State
+        public Dictionary<string, int> CountPersonsByState()
+        {
+            Dictionary<string, int> count = new Dictionary<string, int>();
+
+            Dictionary<string, List<string>> personsByState = new Dictionary<string, List<string>>();
+            personsByState = SearchPersonsByState();
+            foreach (var items in personsByState)
+            {
+                count.Add(items.Key, items.Value.Count);
+            }
+
+            return count;
+        }
+
+        //Display the State and Count
+        public void DisplayPersonCountByState()
+        {
+            Dictionary<string, int> countByState = new Dictionary<string, int>();
+            countByState = CountPersonsByState();
+
+            Console.WriteLine("State     Count");
+            Console.WriteLine("_________________");
+            foreach (var item in countByState)
+            {
+                Console.WriteLine(item.Key + "     " + item.Value);
+            }
+            Console.WriteLine();
+        }
+
+        //Dictionary to search Value
+        private Dictionary<string, List<string>> SearchPersonsByState()
+        {
+            Dictionary<string, List<string>> detailsOfAllByState = new Dictionary<string, List<string>>();
+            foreach (var addressBook in _AddressBookforImplement)
+            {
+                Dictionary<string, List<string>> dict = new Dictionary<string, List<string>>();
+                dict = addressBook.Value.AllContactNamesByState();
+                foreach (var item in dict)
+                {
+                    if (detailsOfAllByState.ContainsKey(item.Key))
+                        detailsOfAllByState[item.Key].AddRange(item.Value);
+                    else
+                        detailsOfAllByState.Add(item.Key, item.Value);
+                }
+            }
+            return detailsOfAllByState;
+        }
+
+
+        public Dictionary<string, int> CountPersonsByCity()
+        {
+            Dictionary<string, int> count = new Dictionary<string, int>();
+
+            Dictionary<string, List<string>> personsByCity = new Dictionary<string, List<string>>();
+            personsByCity = SearchPersonsByCity();
+            foreach (var items in personsByCity)
+            {
+                count.Add(items.Key, items.Value.Count);
+            }
+
+            return count;
+        }
+
+        public void DisplayPersonCountByCity()
+        {
+            Dictionary<string, int> countByCity = new Dictionary<string, int>();
+            countByCity = CountPersonsByCity();
+
+            Console.WriteLine("City     Count");
+            Console.WriteLine("_________________");
+            foreach (var item in countByCity)
+            {
+                Console.WriteLine(item.Key + "     " + item.Value);
+            }
+        }
+
+        private Dictionary<string, List<string>> SearchPersonsByCity()
+        {
+            Dictionary<string, List<string>> detailsOfAllByCity = new Dictionary<string, List<string>>();
+            foreach (var addressBook in _AddressBookforImplement)
+            {
+                Dictionary<string, List<string>> dict = new Dictionary<string, List<string>>();
+                dict = addressBook.Value.AllContactNamesByCity();
+                foreach (var item in dict)
+                {
+                    if (detailsOfAllByCity.ContainsKey(item.Key))
+                        detailsOfAllByCity[item.Key].AddRange(item.Value);
+                    else
+                        detailsOfAllByCity.Add(item.Key, item.Value);
+                }
+            }
+            return detailsOfAllByCity;
+        }
     }
 }
