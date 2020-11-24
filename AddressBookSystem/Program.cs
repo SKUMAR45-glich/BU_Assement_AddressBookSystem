@@ -114,6 +114,7 @@ namespace AddressBookSystem
                     "4: Display the contents of the AddresBook\n"+
                     "5. Display Content by State\n"+
                     "6. Display Content by City\n"+
+                    "7. Sort By Name\n"+
                     "0 : Exit");
 
                     try
@@ -150,6 +151,10 @@ namespace AddressBookSystem
 
                         case 6:
                             addressBook.SearchByCity();                                 //To Search by City in AddressBook
+                            break;
+
+                        case 7:
+                            addressBook.SortPersonsByName();                               //Sort By Name in AddressBook
                             break;
 
                         case 0:

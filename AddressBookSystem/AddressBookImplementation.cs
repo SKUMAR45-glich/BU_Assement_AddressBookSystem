@@ -232,5 +232,19 @@ namespace AddressBookSystem
         {
             return _personByCity;
         }
+
+        //Sorted by Name
+        public List<string> sortedByName()
+        {
+            List<string> sortedName = new List<string>();
+            foreach (var element in _addressBook)
+            {
+                sortedName.Add(element.Value.ToString());
+            }
+            sortedName.Sort();
+            return sortedName;
+        }
+
+
     }
 }

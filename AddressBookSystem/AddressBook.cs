@@ -208,5 +208,25 @@ namespace AddressBookSystem
             }
             return detailsOfAllByCity;
         }
+
+
+        //Sorting 
+        public void SortPersonsByName()
+        {
+            if (_AddressBookforImplement.ContainsKey(_name))                                                           //Check for AddressBook Name
+            {
+                List<string> sortedPersonsByName = _AddressBookforImplement[_name].sortedByName();                          //Function to sort by name
+                if (sortedPersonsByName.Count > 0)
+                {
+                    Console.WriteLine("Contacts after sorting by name");
+                    foreach (string person in sortedPersonsByName)                                                        
+                        Console.WriteLine(person);                                                                     //Display
+                }
+            }
+            else
+            {
+                Console.WriteLine("Please Enter Correct AddressBook");
+            }
+        }
     }
 }
