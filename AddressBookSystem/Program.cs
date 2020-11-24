@@ -93,6 +93,8 @@ namespace AddressBookSystem
                     "2 : Edit a Contact Detail\n" +
                     "3 : Delete a Contact Detail\n" +
                     "4: Display the contents of the AddresBook\n"+
+                    "5. Display Content by State\n"+
+                    "6. Display Content by City\n"+
                     "0 : Exit");
 
                     try
@@ -121,6 +123,14 @@ namespace AddressBookSystem
 
                         case 4:
                             addressBook.DisplayContactsInCurrentAddressBook();               //Display the Contact in the AddressBook
+                            break;
+
+                        case 5:
+                            addressBook.SearchByState();                                 //To Search by State in AddressBook 
+                            break;
+
+                        case 6:
+                            addressBook.SearchByCity();                                 //To Search by City in AddressBook
                             break;
 
                         case 0:

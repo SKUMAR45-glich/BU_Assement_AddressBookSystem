@@ -174,5 +174,27 @@ namespace AddressBookSystem
                 Console.WriteLine(item.Value.Display());
             }
         }
+
+
+        //Display Contact Details By Accoring to State
+        public void DisplayContactByState(string state)
+        {
+            foreach (var item in _addressBook)
+            {
+                if (item.Value.State == state)                                            //Check for the State
+                    Console.WriteLine(item.Value.Display());
+            }
+        }
+
+
+        //Display Contact Details By Accoring to City
+        public void DisplayContactByCity(string city)
+        {
+           foreach (var item in _addressBook)
+            {
+                if (item.Value.City == city)                                             //Check for the City
+                    Console.WriteLine(item.Value.Display());
+            }
+        }
     }
 }
