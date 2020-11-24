@@ -34,6 +34,8 @@ namespace AddressBookSystem
 
             Console.Write("First Name : ");
             contact.FirstName = Console.ReadLine();
+
+            //Throw Exception if Name is InValid
             if (!regexName.IsMatch(contact.FirstName))
             {
                 throw new ValidationException(ValidationException.InvalidationType.INVALID_FIRST_NAME, "Please enter first letter capital and length morethan equal to 3");
@@ -48,13 +50,18 @@ namespace AddressBookSystem
             contact.Zip = Console.ReadLine();
             Console.Write("Phone Number : ");
             contact.PhoneNumber = Console.ReadLine();
+
+            //Throw Exception if PhoneNumber is InValid
             if (!regexPhone.IsMatch(contact.PhoneNumber))
             {
                 throw new ValidationException(ValidationException.InvalidationType.INVALID_PHONE_NUMBER, "Phone Number should start with 91 and have exactly 10 digits");
             }
             
+
             Console.Write("Email : ");
             contact.Email = Console.ReadLine();
+
+            //Throw Exception if Email is InValid
             if (!regexEmail.IsMatch(contact.Email))
             {
                 throw new ValidationException(ValidationException.InvalidationType.INVALID_EMAIL, "Please Enter Valid Email ID");
@@ -63,7 +70,6 @@ namespace AddressBookSystem
 
             _addressBook.Add(contact.FirstName, contact);
 
-            //contact.Display();
 
             return;
         }
