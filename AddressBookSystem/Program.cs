@@ -115,6 +115,8 @@ namespace AddressBookSystem
                     "5. Display Content by State\n"+
                     "6. Display Content by City\n"+
                     "7. Sort By Name\n"+
+                    "8. Store AddressBook in File\n"+
+                    "9. Implement CSV Implementation\n"+
                     "0 : Exit");
 
                     try
@@ -155,6 +157,14 @@ namespace AddressBookSystem
 
                         case 7:
                             addressBook.SortPersonsByName();                               //Sort By Name in AddressBook
+                            break;
+
+                        case 8:
+                            addressBook.DoIO();
+                            break;
+
+                        case 9:
+                            addressBook.ImplementCSVDataHandling();
                             break;
 
                         case 0:

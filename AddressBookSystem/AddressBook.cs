@@ -1,5 +1,9 @@
-﻿using System;
+﻿using CsvHelper;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace AddressBookSystem
@@ -219,7 +223,7 @@ namespace AddressBookSystem
                 if (sortedPersonsByName.Count > 0)
                 {
                     Console.WriteLine("Contacts after sorting by name");
-                    foreach (string person in sortedPersonsByName)                                                        
+                    foreach (string person in sortedPersonsByName)
                         Console.WriteLine(person);                                                                     //Display
                 }
             }
@@ -228,5 +232,78 @@ namespace AddressBookSystem
                 Console.WriteLine("Please Enter Correct AddressBook");
             }
         }
+
+        public void DoIO()
+        {
+            Console.Write("1. Save/Write as .txt file\n2. Read a .txt file\nEnter your option :");
+            var input = Convert.ToInt32(Console.ReadLine());
+            switch (input)
+            {
+                case 1:
+                    WriteUsingStreamWriter();
+                    break;
+                
+                case 2:
+                    ReadfromStreamReader();
+                    break;
+            }
+
+            
+        }
+
+        public static void ReadfromStreamReader()
+        {
+            string path = @"C:/Users/saura/Desktop/Training/BU_Presentation/AddressBookusingC#/AddressBookSystem/Example.txt";
+            using (StreamReader sr = File.OpenText(path))
+            {
+                string s = "";
+                while ((s = sr.ReadLine()) != null)
+                {
+                    Console.WriteLine(s);
+                }
+            }
+        }
+        public static void WriteUsingStreamWriter()
+        {
+            string path = @"C:/Users/saura/Desktop/Training/BU_Presentation/AddressBookusingC#/AddressBookSystem/Example.txt";
+            using (StreamWriter sr = File.AppendText(path))
+            {
+                sr.WriteLine("Hello World - .Net is Awesome");
+                sr.Close();
+
+                Console.WriteLine(File.ReadAllText(path));
+            }
+        }
+
+
+        public void ImplementCSVDataHandling()
+        {
+            string supportFilePath = @"C:\Users\saura\Desktop\Training\BU_Presentation\AddressBookusingC#\AddressBookSystem\addressBook.csv";
+            string exportFilePath = @"C:\Users\saura\Desktop\Training\BU_Presentation\AddressBookusingC#\AddressBookSystem\exportaddressBook.csv";
+            using (var reader = new StreamReader(supportFilePath))
+            using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+            {
+                var records = csv.GetRecords<ContactDetails>().ToList();
+                Console.WriteLine("Data Reading Done Succrssfully ");
+                foreach (ContactDetails addressData in records)
+                {
+                    Console.WriteLine("\t" + addressData.FirstName);
+                    Console.WriteLine("\t" + addressData.LastName);
+                    Console.WriteLine("\t" + addressData.City);
+                    Console.WriteLine("\t" + addressData.PhoneNumber);
+                    Console.WriteLine("\t" + addressData.State);
+                    Console.WriteLine("\t" + addressData.Zip);
+                    Console.WriteLine("\n");
+
+                }
+                using (var writer = new StreamWriter(exportFilePath))
+                using (var csvExport = new CsvWriter(writer, CultureInfo.InvariantCulture))
+                {
+                    csvExport.WriteRecords(records);
+                }
+
+            }
+        }
+
     }
 }

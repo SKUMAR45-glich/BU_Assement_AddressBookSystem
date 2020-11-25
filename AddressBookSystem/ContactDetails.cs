@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AddressBookSystem
 {
-    class ContactDetails
+    public class ContactDetails
     {
         //Initailizaing Variables
 

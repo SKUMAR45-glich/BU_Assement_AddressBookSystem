@@ -1,5 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -7,9 +11,9 @@ namespace AddressBookSystem
 {
     public class AddressBookImplementation
     {
-        Dictionary<string, ContactDetails> _addressBook;
-        Dictionary<string, List<string>> _personByState = new Dictionary<string, List<string>>();
-        Dictionary<string, List<string>> _personByCity = new Dictionary<string, List<string>>();
+        public Dictionary<string, ContactDetails> AddressBook = new Dictionary<string, ContactDetails>();
+        public Dictionary<string, List<string>> _personByState = new Dictionary<string, List<string>>();
+        public Dictionary<string, List<string>> _personByCity = new Dictionary<string, List<string>>();
 
         LogDetails logDetails = new LogDetails();
 
@@ -25,7 +29,7 @@ namespace AddressBookSystem
 
         public AddressBookImplementation()
         {
-            this._addressBook = new Dictionary<string, ContactDetails>();
+            //this.AddressBook = new Dictionary<string, ContactDetails>();
         }
 
 
@@ -72,7 +76,7 @@ namespace AddressBookSystem
             }
             Console.WriteLine();
 
-            _addressBook.Add(contact.FirstName, contact);                 //Addition in Dictionary with FirstName as Key
+            AddressBook.Add(contact.FirstName, contact);                 //Addition in Dictionary with FirstName as Key
 
             AddToStateDict(contact.State, contact.FirstName);
             AddToCityDict(contact.City, contact.FirstName);
@@ -90,7 +94,7 @@ namespace AddressBookSystem
             Console.WriteLine("Enter First Name whose details need to be edited ");
             name = Console.ReadLine();
 
-            if (_addressBook.ContainsKey(name))
+            if (AddressBook.ContainsKey(name))
             {
 
 
@@ -121,23 +125,23 @@ namespace AddressBookSystem
                     {
                         case 1:
                             Console.Write("Edit Updated City :");
-                            _addressBook[name].City = Console.ReadLine();
+                            AddressBook[name].City = Console.ReadLine();
                             break;
                         case 2:
                             Console.Write("Edit Updated State :");
-                            _addressBook[name].State = Console.ReadLine();
+                            AddressBook[name].State = Console.ReadLine();
                             break;
                         case 3:
                             Console.Write("Edit Updated Zip :");
-                            _addressBook[name].Zip = Console.ReadLine();
+                            AddressBook[name].Zip = Console.ReadLine();
                             break;
                         case 4:
                             Console.Write("Edit Updated Phone Number :");
-                            _addressBook[name].PhoneNumber = Console.ReadLine();
+                            AddressBook[name].PhoneNumber = Console.ReadLine();
                             break;
                         case 5:
                             Console.Write("Edit Updated Email Id :");
-                            _addressBook[name].Email = Console.ReadLine();
+                            AddressBook[name].Email = Console.ReadLine();
                             break;
                         case 0:
                             notCompleted = false;
@@ -160,9 +164,9 @@ namespace AddressBookSystem
             Console.WriteLine("Enter First Name whose details need to be deleted ");
             name = Console.ReadLine();
 
-            if (_addressBook.ContainsKey(name))
+            if (AddressBook.ContainsKey(name))
             {
-                _addressBook.Remove(name);
+                AddressBook.Remove(name);
                 Console.WriteLine("Details of " + name + " deleted successfully");
             }
             else
@@ -175,7 +179,7 @@ namespace AddressBookSystem
         public void DisplayAllContacts()
         {
             Console.WriteLine("All Contacts are :");
-            foreach (var item in _addressBook)
+            foreach (var item in AddressBook)
             {
                 Console.WriteLine(item.Value.Display());
             }
@@ -185,7 +189,7 @@ namespace AddressBookSystem
         //Display Contact Details By Accoring to State
         public void DisplayContactByState(string state)
         {
-            foreach (var item in _addressBook)
+            foreach (var item in AddressBook)
             {
                 if (item.Value.State == state)                                            //Check for the State
                     Console.WriteLine(item.Value.Display());
@@ -196,7 +200,7 @@ namespace AddressBookSystem
         //Display Contact Details By Accoring to City
         public void DisplayContactByCity(string city)
         {
-           foreach (var item in _addressBook)
+           foreach (var item in AddressBook)
             {
                 if (item.Value.City == city)                                             //Check for the City
                     Console.WriteLine(item.Value.Display());
@@ -237,14 +241,13 @@ namespace AddressBookSystem
         public List<string> sortedByName()
         {
             List<string> sortedName = new List<string>();
-            foreach (var element in _addressBook)
+            foreach (var element in AddressBook)
             {
-                sortedName.Add(element.Value.ToString());
+                sortedName.Add(element.Value.Display());
             }
             sortedName.Sort();
             return sortedName;
         }
-
 
     }
 }
