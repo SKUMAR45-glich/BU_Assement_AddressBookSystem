@@ -203,7 +203,7 @@ namespace AddressBookSystem
             }
         }
 
-
+        //Add to state dictionary
         private void AddToStateDict(string state, string name)
         {
             if (this._personByState.ContainsKey(state))
@@ -212,7 +212,7 @@ namespace AddressBookSystem
                 this._personByState.Add(state, new List<string>() { name });
         }
 
-
+        //Add to city dictionary
         private void AddToCityDict(string city, string name)
         {
             if (this._personByCity.ContainsKey(city))

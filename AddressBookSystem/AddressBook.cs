@@ -313,7 +313,7 @@ namespace AddressBookSystem
                         foreach (var contact in contacts)
                         {
 
-                            Console.WriteLine($"{contact.City}");
+                            Console.WriteLine($"{contact.FirstName} {contact.LastName}");
                         }
                     }
                     break;
@@ -324,5 +324,40 @@ namespace AddressBookSystem
             }
         }
 
+        //Implement in JSON form
+        public void ImplementJSONDataHandling()
+        {
+            Console.Write("1. Save/Write as .json file\n2. Read a .json file\nEnter your option :");
+            int input = Convert.ToInt32(Console.ReadLine());
+            
+            switch (input)
+            {
+                case 1:
+                    string path = @"C:\Users\saura\BU_FilesforC#\" + _name + ".json";
+                    var list = _AddressBookforImplement[_name].AddressBook.ToList();
+                    var copy = new List<ContactDetails>();
+                    foreach (var item in list)
+                        copy.Add(item.Value);
+                    var serializer = new Newtonsoft.Json.JsonSerializer();
+                    using (var streamWriter = new StreamWriter(path))
+                    using (var jsonWriter = new JsonTextWriter(streamWriter))
+                    {
+                        serializer.Serialize(jsonWriter, copy);
+                    }
+                    break;
+                case 2:
+                    path = @"C:\Users\saura\BU_FilesforC#\" + _name + ".json";
+                    var contacts = JsonConvert.DeserializeObject<List<KeyValuePair<string, ContactDetails>>>(File.ReadAllText(path));
+                    foreach (var contact in contacts)
+                    {
+                        Console.WriteLine($"{contact.Value.FirstName} {contact.Value.LastName}");
+                    }
+                    break;
+
+                default:
+                    Console.WriteLine("Please Enter correct Value");
+                    break;
+            }
+        }
     }
 }
