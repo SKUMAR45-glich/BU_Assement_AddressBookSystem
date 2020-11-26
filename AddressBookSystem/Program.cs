@@ -162,6 +162,10 @@ namespace AddressBookSystem
                             addressBook.DoIO();                                            //InputOuput File of AddressBook
                             break;
 
+                        case 9:
+                            addressBook.ImplementCSVDataHandling();
+                            break;
+
                         case 0:
                             checkContactDetails = false;                              //Exist the present AddressBook
                             break;

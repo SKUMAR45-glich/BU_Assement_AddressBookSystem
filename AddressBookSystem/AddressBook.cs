@@ -275,8 +275,53 @@ namespace AddressBookSystem
                     Console.WriteLine("Plaese Enter correct option");
                     break;
             }
+        }
 
+        //Implementation of CSV form
+        public void ImplementCSVDataHandling()
+        {
+            Console.Write("1. Save/Write as .csv file\n2. Read a .csv file\nEnter your option :");
+            int input = Convert.ToInt32(Console.ReadLine());
+            
+            switch (input)
+            {
+                case 1:
+                    string path = @"C:\Users\saura\BU_FilesforC#\" + _name + ".csv";                         //Write File in CSV form
+                    using (var writer = new StreamWriter(path))
+                    using (var csvWriter = new CsvWriter(writer, CultureInfo.InvariantCulture))
+                    {
+                        var list = _AddressBookforImplement[_name].AddressBook;
+                        csvWriter.WriteRecords(list);
+                    }
+                    break;
+                
+                case 2:
+                    path = @"C:\Users\saura\BU_FilesforC#\" + _name + ".csv";                                    
+                    
+                    if (!File.Exists(path))
+                    {
+                        Console.WriteLine("No Such File Exists, Please Save before reading.");
+                        break;
+                    
+                    }
+                    
+                    using (var reader = new StreamReader(path))
+                    using (var csvReader = new CsvReader(reader, CultureInfo.InvariantCulture))                          //Read the entered details
+                    {
+                        var contacts = csvReader.GetRecords<ContactDetails>().ToList();
+                        Console.WriteLine("There are following contacts saved in file : ");
+                        foreach (var contact in contacts)
+                        {
 
+                            Console.WriteLine($"{contact.City}");
+                        }
+                    }
+                    break;
+
+                default:
+                    Console.WriteLine("Please Enter correct Value");
+                    break;
+            }
         }
 
     }
