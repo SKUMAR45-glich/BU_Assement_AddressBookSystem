@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -15,7 +13,6 @@ namespace AddressBookSystem
         public Dictionary<string, List<string>> _personByState = new Dictionary<string, List<string>>();
         public Dictionary<string, List<string>> _personByCity = new Dictionary<string, List<string>>();
 
-        LogDetails logDetails = new LogDetails();
 
 
         //Regex Checking for Values
@@ -117,8 +114,7 @@ namespace AddressBookSystem
                     }
                     catch (Exception e)
                     {
-                        logDetails.LogDebug("Class : AddressBookMain , Method : EditContact, Field : choice");
-                        logDetails.LogError(e.Message + " It should be a integer");
+                        Console.WriteLine(e.Message);
                         choice = 0;
                     }
                     switch (choice)

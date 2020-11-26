@@ -1,18 +1,18 @@
 ﻿using CsvHelper;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 
 namespace AddressBookSystem
 {
     public class AddressBook
     {
-        LogDetails logDetails = new LogDetails();
-
-
+        
         //Dictionary for AddressbookImplementation with Key as AddressBook name and vale as Implementation Function
 
         Dictionary<string, AddressBookImplementation> _AddressBookforImplement = new Dictionary<string, AddressBookImplementation>();
@@ -47,8 +47,7 @@ namespace AddressBookSystem
                 _AddressBookforImplement.Add(this._name, addressBookImplementation);
             }
 
-            logDetails.LogInfo("Added Succesfully");
-
+            
 
         }
 
@@ -71,7 +70,7 @@ namespace AddressBookSystem
         public void DisplayContactsInCurrentAddressBook()
         {
             _AddressBookforImplement[Name].DisplayAllContacts();                         //Display by AddressBook Name as key
-            logDetails.LogInfo("Data Displayed");
+            
         }
 
 
@@ -233,76 +232,51 @@ namespace AddressBookSystem
             }
         }
 
+        //Function for FileInputOuput
         public void DoIO()
         {
-            Console.Write("1. Save/Write as .txt file\n2. Read a .txt file\nEnter your option :");
+            Console.Write("1. Save/Write as .txt file\n2. Read a .txt file\nEnter your option :");                        
             var input = Convert.ToInt32(Console.ReadLine());
+            
             switch (input)
             {
-                case 1:
-                    WriteUsingStreamWriter();
-                    break;
-                
-                case 2:
-                    ReadfromStreamReader();
-                    break;
-            }
-
             
-        }
+                case 1:
+                    var path = @"C:\Users\saura\BU_FilesforC#\" + _name + ".txt";                           //Make the path where to make the text file 
+                   
+                    using (var streamWriter = File.AppendText(path))                                             //Append the values in a text file
+                    {
+                        foreach (var contact in _AddressBookforImplement[_name].AddressBook)
+                        {
+                            streamWriter.WriteLine(contact.Value.FirstName + " " + contact.Value.LastName);
+                        }
+                        streamWriter.Close();
+                    }
+                    break;
 
-        public static void ReadfromStreamReader()
-        {
-            string path = @"C:/Users/saura/Desktop/Training/BU_Presentation/AddressBookusingC#/AddressBookSystem/Example.txt";
-            using (StreamReader sr = File.OpenText(path))
-            {
-                string s = "";
-                while ((s = sr.ReadLine()) != null)
-                {
-                    Console.WriteLine(s);
-                }
+                case 2:
+                    path = @"C:\Users\saura\BU_FilesforC#\" + _name + ".txt";                                      
+                    
+                    if (!File.Exists(path))
+                    {
+                        Console.WriteLine("No Such File Exists");
+                        break;
+                    }
+                    
+                    using (var streamReader = File.OpenText(path))
+                    {
+                        string str = "";
+                        while ((str = streamReader.ReadLine()) != null)                                 //Read the data of Text file
+                            Console.WriteLine(str);
+                    }
+                    break;
+
+                default:
+                    Console.WriteLine("Plaese Enter correct option");
+                    break;
             }
-        }
-        public static void WriteUsingStreamWriter()
-        {
-            string path = @"C:/Users/saura/Desktop/Training/BU_Presentation/AddressBookusingC#/AddressBookSystem/Example.txt";
-            using (StreamWriter sr = File.AppendText(path))
-            {
-                sr.WriteLine("Hello World - .Net is Awesome");
-                sr.Close();
-
-                Console.WriteLine(File.ReadAllText(path));
-            }
-        }
 
 
-        public void ImplementCSVDataHandling()
-        {
-            string supportFilePath = @"C:\Users\saura\Desktop\Training\BU_Presentation\AddressBookusingC#\AddressBookSystem\addressBook.csv";
-            string exportFilePath = @"C:\Users\saura\Desktop\Training\BU_Presentation\AddressBookusingC#\AddressBookSystem\exportaddressBook.csv";
-            using (var reader = new StreamReader(supportFilePath))
-            using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
-            {
-                var records = csv.GetRecords<ContactDetails>().ToList();
-                Console.WriteLine("Data Reading Done Succrssfully ");
-                foreach (ContactDetails addressData in records)
-                {
-                    Console.WriteLine("\t" + addressData.FirstName);
-                    Console.WriteLine("\t" + addressData.LastName);
-                    Console.WriteLine("\t" + addressData.City);
-                    Console.WriteLine("\t" + addressData.PhoneNumber);
-                    Console.WriteLine("\t" + addressData.State);
-                    Console.WriteLine("\t" + addressData.Zip);
-                    Console.WriteLine("\n");
-
-                }
-                using (var writer = new StreamWriter(exportFilePath))
-                using (var csvExport = new CsvWriter(writer, CultureInfo.InvariantCulture))
-                {
-                    csvExport.WriteRecords(records);
-                }
-
-            }
         }
 
     }
