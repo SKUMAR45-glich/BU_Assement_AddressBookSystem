@@ -10,7 +10,7 @@ namespace AddressBookSystem
             Console.WriteLine("========================");
 
             AddressBook addressBook = new AddressBook();
-            addressBook.Name = "General";
+            addressBook.Name = "General";                                                                  //Default value of the addressBook
 
             bool checkAddressBook = true;
             bool checkContactDetails = true; ;
