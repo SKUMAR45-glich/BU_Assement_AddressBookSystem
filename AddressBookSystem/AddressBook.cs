@@ -6,8 +6,7 @@ namespace AddressBookSystem
 {
     public class AddressBook
     {
-        LogDetails logDetails = new LogDetails();
-
+        
 
         //Dictionary for AddressbookImplementation with Key as AddressBook name and vale as Implementation Function
 
@@ -43,7 +42,6 @@ namespace AddressBookSystem
                 _AddressBookforImplement.Add(this._name, addressBookImplementation);
             }
 
-            logDetails.LogInfo("Added Succesfully");
 
 
         }
@@ -67,7 +65,7 @@ namespace AddressBookSystem
         public void DisplayContactsInCurrentAddressBook()
         {
             _AddressBookforImplement[Name].DisplayAllContacts();                         //Display by AddressBook Name as key
-            logDetails.LogInfo("Data Displayed");
+            
         }
 
 

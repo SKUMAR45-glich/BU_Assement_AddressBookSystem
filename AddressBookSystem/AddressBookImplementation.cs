@@ -8,7 +8,6 @@ namespace AddressBookSystem
     public class AddressBookImplementation
     {
         Dictionary<string, ContactDetails> _addressBook;
-        LogDetails logDetails = new LogDetails();
 
 
         //Regex Checking for Values
@@ -107,8 +106,7 @@ namespace AddressBookSystem
                     }
                     catch (Exception e)
                     {
-                        logDetails.LogDebug("Class : AddressBookMain , Method : EditContact, Field : choice");
-                        logDetails.LogError(e.Message + " It should be a integer");
+                        Console.WriteLine(e.Message);
                         choice = 0;
                     }
                     switch (choice)
