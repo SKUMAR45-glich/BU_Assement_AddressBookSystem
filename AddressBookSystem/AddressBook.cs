@@ -6,9 +6,7 @@ namespace AddressBookSystem
 {
     public class AddressBook
     {
-        LogDetails logDetails = new LogDetails();
-
-
+        
         //Dictionary for AddressbookImplementation with Key as AddressBook name and vale as Implementation Function
 
         Dictionary<string, AddressBookImplementation> _AddressBookforImplement = new Dictionary<string, AddressBookImplementation>();
@@ -43,16 +41,14 @@ namespace AddressBookSystem
                 _AddressBookforImplement.Add(this._name, addressBookImplementation);
             }
 
-            logDetails.LogInfo("Added Succesfully");
-
-
         }
+
 
         //Display contact details in current address book
         public void DisplayContactsInCurrentAddressBook()
         {
             _AddressBookforImplement[Name].DisplayAllContacts();
-            logDetails.LogInfo("Data Dispaced");
+            
         }
 
     }

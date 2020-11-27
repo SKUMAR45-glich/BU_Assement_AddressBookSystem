@@ -40,6 +40,7 @@ namespace AddressBookSystem
             {
                 throw new ValidationException(ValidationException.InvalidationType.INVALID_FIRST_NAME, "Please enter first letter capital and length morethan equal to 3");
             }
+
             Console.Write("Last Name : ");
             contact.LastName = Console.ReadLine();
             Console.Write("City : ");
