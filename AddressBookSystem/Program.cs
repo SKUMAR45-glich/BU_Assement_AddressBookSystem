@@ -12,7 +12,6 @@ namespace AddressBookSystem
             Console.WriteLine("Welcome to Address Book");                                      //Welcome Message
             Console.WriteLine("========================");
 
-            LogDetails logDetails = new LogDetails();                                          //Use of Log to generate log of implication
             AddressBook addressBook = new AddressBook();
             addressBook.Name = "General";                                                     // Default value of AddressBook
 
@@ -29,7 +28,7 @@ namespace AddressBookSystem
                 "2 : To use current address books ( " + addressBook.Name + " )\n" +
                 "3 : Switch Address Book\n" +
                 "4. Search by State in AddressBook\n"+
-                "5. Search by Mumbai in AddressBook\n"+
+                "5. Search by City in AddressBook\n"+
                 "0 : Exit");
 
                 int userChoice;
@@ -40,7 +39,7 @@ namespace AddressBookSystem
                 }
                 catch (Exception e)
                 {
-                    logDetails.LogError(e.Message + " It should be a integer");
+                    Console.WriteLine(e.Message);
                     userChoice = 0;
                 }
                  
@@ -53,13 +52,13 @@ namespace AddressBookSystem
                         checkContactDetails = true;
                         Console.WriteLine("Add Name of the new Address Book");                       //Creating the AddressBook
                         addressBook.Name = Console.ReadLine();
-                        logDetails.LogDebug("AddressBook Created");
+
                         break;
 
 
                     case 2:
                         checkContactDetails = true;
-                        logDetails.LogDebug("In current AddressBook");                              //Entering in the AddressBook
+                        
                         break;
 
 
@@ -67,11 +66,11 @@ namespace AddressBookSystem
                         checkContactDetails = true;
                         Console.WriteLine("Enter Name of the Address Book you want to switch");             //Switch the AddressBook
                         addressBook.Name = Console.ReadLine();
-                        logDetails.LogDebug("AddressBook Switched");
+                        
                         break;
 
                     case 4:
-                        addressBook.SearchinAddressBooksByState();
+                        addressBook.SearchinAddressBooksByState();                                          //Search Accross
                         break;
 
                     case 5:
@@ -112,7 +111,7 @@ namespace AddressBookSystem
                     }
                     catch (Exception e)
                     {
-                        logDetails.LogError(e.Message + " It should be a integer");                     
+                        Console.WriteLine(e.Message);
                         choice = 0;
                     }
 
