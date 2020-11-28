@@ -160,6 +160,7 @@ namespace AddressBookSystem
         }
 
 
+        //Dictionary for counting the city
         public Dictionary<string, int> CountPersonsByCity()
         {
             Dictionary<string, int> count = new Dictionary<string, int>();
@@ -174,6 +175,8 @@ namespace AddressBookSystem
             return count;
         }
 
+
+        //Function to diplay the city and count
         public void DisplayPersonCountByCity()
         {
             Dictionary<string, int> countByCity = new Dictionary<string, int>();
@@ -187,6 +190,8 @@ namespace AddressBookSystem
             }
         }
 
+
+        //Search for the city as per user choice of city
         private Dictionary<string, List<string>> SearchPersonsByCity()
         {
             Dictionary<string, List<string>> detailsOfAllByCity = new Dictionary<string, List<string>>();
