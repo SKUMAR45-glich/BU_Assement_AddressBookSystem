@@ -116,6 +116,7 @@ namespace AddressBookSystem
                     "7. Sort By Name\n"+
                     "8. Store AddressBook in File\n"+
                     "9. Implement CSV Implementation\n"+
+                    "10. Implement JSON Implementation"+
                     "0 : Exit");
 
                     try
@@ -166,6 +167,10 @@ namespace AddressBookSystem
                             addressBook.ImplementCSVDataHandling();
                             break;
 
+                        case 10:
+                            addressBook.ImplementJSONDataHandling();
+                            break;
+                            
                         case 0:
                             checkContactDetails = false;                              //Exist the present AddressBook
                             break;
